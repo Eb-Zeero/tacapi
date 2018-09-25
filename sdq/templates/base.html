@@ -1,0 +1,20 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SALT Data Quality</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link
+        href="https://cdn.pydata.org/bokeh/release/bokeh-x.y.z.min.css"
+        rel="stylesheet" type="text/css">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <script src="https://cdn.pydata.org/bokeh/release/bokeh-0.13.0.min.js"></script>
+</head>
+<body>
+<div class="container">
+    {% block page_content %}{% endblock %}
+</div>
+
+</body>
+</html>

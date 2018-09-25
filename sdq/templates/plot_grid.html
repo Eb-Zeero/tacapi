@@ -1,0 +1,8 @@
+<div class="plot-grid" style="grid-template-columns: repeat({{ columns }}, 1fr)">
+    {% for p in plot_html %}
+        <div id="plot-{{ p.id }}">
+            {{ p.grid_div | safe }}
+        </div>
+        {{ p.grid_script | safe }}
+    {% endfor %}
+</div>

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+<nav class="navbar">
+    <div class="navbar-brand">
+        {% for item in primary_menu %}
+            <a class="navbar-item {% if item[1] == primary_menu_item[1] %}is-active{% endif %}"
+               href="/dq/{{ item[1] }}">
+                {{ item[0] }}
+            </a>
+        {% endfor %}
+    </div>
+</nav>
+
+<div class="columns is-variable is-8">
+    <aside class="column menu is-narrow">
+        <ul class="menu-list">
+            {% for item in secondary_menu %}
+                <a {% if item[1] == secondary_menu_item[1] %}class="is-active"{% endif %}
+                   href="/dq/{{ primary_menu_item[1] }}/{{ item[1] }}">
+                    {{ item[0] }}
+                </a>
+            {% endfor %}
+        </ul>
+    </aside>
+    <div class="column">
+        <h1 class="title">
+            {{ title }}
+            <span id="data-quality-info" class="fas fa-question-circle"></span>
+        </h1>
+
+        <div id="data-quality-description" style="display: none">
+            {{ description }}
+        </div>
+        <script>
+            const info = document.querySelector('h1');
+            const description = document.querySelector('#data-quality-description');
+
+            function showDescription() {
+                description.style.display = 'block';
+            }
+
+            function hideDescription() {
+                description.style.display = 'none';
+            }
+
+            info.addEventListener('mouseenter', showDescription);
+            info.addEventListener('mouseleave', hideDescription);
+        </script>
+
+        <div class="data-quality">
+            {{ content | safe }}
+        </div>
+    </div>
+</div>
+{% endblock %}
