@@ -1,0 +1,21 @@
+{% for pl in plot_html %}
+    <div class="columns">
+        {% for p in pl %}
+            <div class="column">
+                 <plot-container>
+                        <div id="plot-{{ p.id }}">
+                            {{ p.grid_div | safe }}
+                        </div>
+                     <plot-info>
+                         <div class="info">This is a(n) circle.</div>
+                     </plot-info>
+                     <plot-modal>
+                         <div id="plot-{{ p.modal_id }}">
+                             {{ p.closeup_div | safe }}
+                         </div>
+                     </plot-modal>
+                 </plot-container>
+            </div>
+        {% endfor %}
+    </div>
+{% endfor %}

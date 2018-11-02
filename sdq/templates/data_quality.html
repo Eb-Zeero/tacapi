@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 
 {% block page_content %}
-<nav class="navbar">
-    <div class="navbar-brand">
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand is-hoverable">
         {% for item in primary_menu %}
-            <a class="navbar-item {% if item[1] == primary_menu_item[1] %}is-active{% endif %}"
+            <a class="navbar-item button  {% if item[1] == primary_menu_item[1] %}is-primary{% endif %}"
                href="/dq/{{ item[1] }}">
                 {{ item[0] }}
             </a>
         {% endfor %}
     </div>
 </nav>
+
+<dq-date-picker action="/dq"></dq-date-picker>
 
 <div class="columns is-variable is-8">
     <aside class="column menu is-narrow">
@@ -48,7 +50,7 @@
             info.addEventListener('mouseleave', hideDescription);
         </script>
 
-        <div class="data-quality">
+        <div class="data-quality" id="data-quality">
             {{ content | safe }}
         </div>
     </div>
