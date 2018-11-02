@@ -101,18 +101,23 @@ def plasma_colors():
             ]
 
 
-def dates(form_data=None):
-    if form_data is None:
-
+def dates(start_date=None, end_date=None):
+    if not start_date or not end_date:
         _dates = {
-                'start_date': date.today() - relativedelta(months=+3),
-                'end_date': date.today()
-            }
+            'start_date': date.today() - relativedelta(months=+3),
+            'end_date': date.today()
+        }
     else:
         _dates = {
-            'start_date': form_data['start-date'],
-            'end_date': form_data['end-date']
+            'start_date': start_date,
+            'end_date': end_date
         }
 
+    if _dates['start_date'] > _dates['end_date']:
+        _dates = {
+            'start_date': end_date,
+            'end_date': start_date
+        }
+    print(_dates)
     g.dates = _dates
     return _dates
