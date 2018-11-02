@@ -14,16 +14,19 @@ _telescope_menu = (
 
 
 _salticam_menu = (
+    ('Diagnostic', 'diagnostics', 'sdq.content.salticam.diagnostics'),
     ('Bias Levels', 'bias', 'sdq.content.salticam.bias'),
     ('Throughput', 'throughput', 'sdq.content.salticam.throughput')
 )
 
 _rss_menu = (
+    ('Diagnostic', 'diagnostics', 'sdq.content.rss.diagnostics'),
     ('Bias Levels', 'bias', 'sdq.content.rss.bias'),
     ('Throughput', 'throughput', 'sdq.content.rss.throughput'),
     ('Straylight', 'straylight', 'sdq.content.rss.straylight')
 )
 _hrs_menu = (
+    ('Diagnostic', 'diagnostics', 'sdq.content.hrs.diagnostics'),
     ('Arc Wave', 'arc', 'sdq.content.hrs.arc'),
     ('Bias Levels', 'bias', 'sdq.content.hrs.bias'),
     ('Flats', 'flats', 'sdq.content.hrs.flats'),
@@ -79,10 +82,3 @@ def secondary_menu_item(url):
         raise NotFoundException('The requested secondary menu item does not exist')
 
     return menu_item
-
-
-def dates():
-    return {
-        'start_date': '2018-08-01',
-        'end_date': '2018-09-16'
-    }
