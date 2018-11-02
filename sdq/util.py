@@ -118,6 +118,5 @@ def dates(start_date=None, end_date=None):
             'start_date': end_date,
             'end_date': start_date
         }
-    print(_dates)
     g.dates = _dates
     return _dates
