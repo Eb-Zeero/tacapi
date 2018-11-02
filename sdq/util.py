@@ -1,40 +1,72 @@
 from bokeh.embed import components
+from itertools import zip_longest
 from collections import namedtuple
-from flask import render_template
+from flask import render_template, g
+from datetime import date
+from dateutil.relativedelta import relativedelta
 
-
-PlotHtml = namedtuple('PlotHtml', ('id', 'grid_div', 'grid_script', 'closeup_div', 'closeup_script'))
+PlotHtml = namedtuple('PlotHtml', ('id', 'modal_id', 'grid_div', 'grid_script', 'closeup_div', 'closeup_script'))
 
 plot_id = 1
 
 
-def plot_grid(columns, *plots):
+def grouper(n, iterable, fillvalue=None):
+    "grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx"
+    args = [iter(iterable)] * n
+    return zip_longest(fillvalue=fillvalue, *args)
+
+
+def bokeh_plot_grid(columns, *plots):
     # create html content
     html = []
-    for plot in plots:
-        current_sizing_mode = plot.sizing_mode
+    for p in plots:
+        modal_plot = p
+        plot = p
+
         try:
-            current_toolbar_location = plot.toolbar_location
+
+            modal_plot.sizing_mode = 'scale_both'
+            p.toolbar.logo = None
+            modal_plot.toolbar_location = 'right'
+            modal_plot.height = 700
+            modal_plot.width = 700
+            modal_plot.toolbar_location = 'right'
+            modal_grid_html = components(modal_plot)
             plot.sizing_mode = 'scale_width'
-            try:
-                plot.toolbar_location = None
-                grid_html = components(plot)
-            finally:
-                plot.toolbar_location = current_toolbar_location
-            closeup_html = components(plot)
+            plot.toolbar_location = None
+            p.toolbar.active_drag = None
+
+            grid_html = components(plot)
+
         finally:
-            plot.sizing_mode = current_sizing_mode
+            pass
 
         global plot_id
         html.append(PlotHtml(id=plot_id,
+                             modal_id=str(plot_id)+'-modal',
                              grid_div=grid_html[1],
                              grid_script=grid_html[0],
-                             closeup_div=grid_html[1],
-                             closeup_script=closeup_html[0]))
+                             closeup_div=modal_grid_html[1],
+                             closeup_script=modal_grid_html[0]))
         plot_id += 1
-
     return render_template('plot_grid.html', columns=columns, plot_html=html)
 
+
+def none_bokeh_plot_grid(columns, *plots):
+    # create html content
+    html = []
+    for plot in plots:
+        global plot_id
+        html.append(PlotHtml(id=plot_id,
+                             modal_id=str(plot_id) + '-modal',
+                             grid_div=plot,
+                             grid_script='',
+                             closeup_div=plot,
+                             closeup_script=''))
+        plot_id += 1
+
+    x_grouped = list(grouper(2, html))
+    return render_template('none_bokeh_plot_grid.html', columns=columns, plot_html=x_grouped)
 
 def plasma_colors():
     return ['#0C0786', '#100787', '#130689', '#15068A', '#18068B', '#1B068C', '#1D068D', '#1F058E', '#21058F',
@@ -67,3 +99,20 @@ def plasma_colors():
             '#F6E425', '#F6E525', '#F5E726', '#F5E926', '#F4EA26', '#F3EC26', '#F3EE26', '#F2F026', '#F2F126',
             '#F1F326', '#F0F525', '#F0F623', '#EFF821'
             ]
+
+
+def dates(form_data=None):
+    if form_data is None:
+
+        _dates = {
+                'start_date': date.today() - relativedelta(months=+3),
+                'end_date': date.today()
+            }
+    else:
+        _dates = {
+            'start_date': form_data['start-date'],
+            'end_date': form_data['end-date']
+        }
+
+    g.dates = _dates
+    return _dates
