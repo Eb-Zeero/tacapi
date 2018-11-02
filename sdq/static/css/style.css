@@ -19,3 +19,29 @@
     display: grid;
     grid-gap: 40px;
 }
+div.plot.large {
+}
+
+.plots {
+    display: grid;
+    grid-template-columns: 310px 310px 310px;
+    grid-gap: 20px;
+    border: 1px solid lightgray;
+    margin: 20px;
+    padding: 20px;
+}
+
+plot-container {
+    border: 1px solid lightgray;
+}
+
+.info {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: white;
+}
+
+.modal-card, .modal-content {
+    position: static;
+}
