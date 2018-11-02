@@ -6,10 +6,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link
-        href="https://cdn.pydata.org/bokeh/release/bokeh-x.y.z.min.css"
+        href="https://cdn.pydata.org/bokeh/release/bokeh-0.12.13.min.css"
         rel="stylesheet" type="text/css">
+    <link
+        href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.13.min.css"
+        rel="stylesheet" type="text/css">
+    <link
+        href="https://cdn.pydata.org/bokeh/release/bokeh-tables-0.12.13.min.css"
+        rel="stylesheet" type="text/css">
+
+    <script src="https://cdn.pydata.org/bokeh/release/bokeh-0.12.13.min.js"></script>
+    <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.13.min.js"></script>
+    <script src="https://cdn.pydata.org/bokeh/release/bokeh-tables-0.12.13.min.js"></script>
+
     <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bulma-calendar@5.0.1/dist/js/bulma-calendar.min.js"></script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-0.13.0.min.js"></script>
+    <script src="https://unpkg.com/@saltastro/bulma-plot-container"></script>
+
+    <script src="{{ url_for('static', filename='build/dq-date-picker.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
 <div class="container">
