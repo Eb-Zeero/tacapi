@@ -1,7 +1,9 @@
 from importlib import import_module, reload
 
+from flask import make_response
+
 from sdq.errors import ContentModuleException
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from sdq.menus import primary_menu, primary_menu_item, secondary_menu, secondary_menu_item
 from sdq.util import dates
 
@@ -28,13 +30,18 @@ def generic_error(e):
 @app.route('/dq/<path:page>', methods=["GET", "POST"])
 def hello(page):
     # get the module for the content from the selected secondary menu item
-    sec_menu_item = secondary_menu_item(page)
-    module_name = sec_menu_item[2]
+
     _dates = dates()
     if request.method == 'POST':
         _dates = dates(start_date=request.form['start-date'], end_date=request.form['end-date'])
+        if page == '':
+            page = request.referrer.rsplit('/dq/', 1)[1]
     elif request.cookies.get('start-date') and request.cookies.get('end-date'):
         _dates = dates(start_date=request.cookies.get('start-date'), end_date=request.cookies.get('end-date'))
+
+    sec_menu_item = secondary_menu_item(page)
+    module_name = sec_menu_item[2]
+
     try:
         content_module = import_module(module_name)
         reload(content_module)
@@ -68,14 +75,21 @@ Please refer to the documentation on adding pages to this website.'\
 Please refer to the documentation on adding pages to this website.'\
         .format(module_name=module_name)
         raise ContentModuleException(error)
+    if request.method == 'POST':
+        return redirect('/dq/'+page)
 
-    return render_template('data_quality.html',
-                           primary_menu=primary_menu(),
-                           page=page,
-                           dates=_dates,
-                           primary_menu_item=primary_menu_item(page),
-                           secondary_menu=secondary_menu(page),
-                           secondary_menu_item=secondary_menu_item(page),
-                           title=title,
-                           content=content,
-                           description=description)
+    resp = make_response(render_template(
+        'data_quality.html',
+        primary_menu=primary_menu(),
+        page=page,
+        dates=_dates,
+        primary_menu_item=primary_menu_item(page),
+        secondary_menu=secondary_menu(page),
+        secondary_menu_item=secondary_menu_item(page),
+        title=title,
+        content=content,
+        description=description)
+    )
+    resp.set_cookie('start-date', value=str(_dates['start_date']), path='/dq')
+    resp.set_cookie('end-date', value=str(_dates['end_date']), path='/dq')
+    return resp
