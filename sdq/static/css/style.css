@@ -45,3 +45,50 @@ plot-container {
 .modal-card, .modal-content {
     position: static;
 }
+
+.form {
+  font-size: 30px;
+}
+
+.input {
+  max-width: 15%;
+  margin-top: 1%;
+  margin-right: 2%;
+  width: 20%;
+}
+.button {
+  margin-top: 1%;
+}
+
+.icon {
+  font-size: 12px;
+}
+
+b.tip {
+    border-bottom: 1px dashed;
+    text-decoration: none
+}
+b.tip:hover {
+    cursor: help;
+    position: relative;
+
+}
+b.tip span {
+    display: none
+}
+b.tip:hover span {
+    color: black;
+    border: #c0c0c0 1px dotted;
+    padding: 5px 20px 5px 5px;
+    display: block;
+    z-index: 100;
+    background: #f0f0f0 no-repeat 100% 5%;
+    left: 0px;
+    margin: 10px;
+    width: 350px;
+    position: absolute;
+    top: 10px;
+    text-decoration: none;
+    font-weight: 5px;
+    font-size: 15px;
+}
