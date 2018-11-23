@@ -12,7 +12,31 @@
     </div>
 </nav>
 
-<dq-date-picker action="/dq"></dq-date-picker>
+<div class="container">
+  <form id="form" class="form" method="post" action="/dq">
+
+      <input
+              id="start-date"
+              class="input"
+              type="date"
+              value={{ dates.start_date }}
+              name="start-date"/>
+      <input
+          id="end-date"
+          class="input"
+          type="date"
+          value={{ dates.end_date }}
+          name="end-date"/>
+      <input
+          id="submit-dates"
+          type="submit"
+          value="Query date"
+          name="query"
+          class="button is-info"/>
+      <i class="fas fa-sync-alt is-pulled-right icon" id="refresh-dates"></i>
+  </form>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/date_picker.js') }}"></script>
+</div>
 
 <div class="columns is-variable is-8">
     <aside class="column menu is-narrow">
@@ -26,14 +50,20 @@
         </ul>
     </aside>
     <div class="column">
-        <h1 class="title">
-            {{ title }}
-            <span id="data-quality-info" class="fas fa-question-circle"></span>
-        </h1>
+            <h1 class="title">
+                {{ title }}
+                <span>
+                    <b class="tip">
+                        <i id="data-quality-info" class="fas fa-question-circle"></i>
+                        <span>{{ description }}</span>
+                    </b>
+                </span>
 
-        <div id="data-quality-description" style="display: none">
-            {{ description }}
-        </div>
+            </h1>
+
+        <!--<div id="data-quality-description" style="display: none">-->
+            <!--{{ description }}-->
+        <!--</div>-->
         <script>
             const info = document.querySelector('h1');
             const description = document.querySelector('#data-quality-description');
@@ -48,6 +78,7 @@
 
             info.addEventListener('mouseenter', showDescription);
             info.addEventListener('mouseleave', hideDescription);
+
         </script>
 
         <div class="data-quality" id="data-quality">
@@ -56,3 +87,4 @@
     </div>
 </div>
 {% endblock %}
+
