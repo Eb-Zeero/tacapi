@@ -23,7 +23,6 @@ content = bokeh_plot_grid(2,
                           plot('MEDIUM RESOLUTION', 'red'),
                           plot('LOW RESOLUTION', 'blue'),
                           plot('LOW RESOLUTION', 'red'),
-
                           )
 
 description = 'Arc waves fro HRS'
