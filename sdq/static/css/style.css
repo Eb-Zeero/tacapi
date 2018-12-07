@@ -5,6 +5,11 @@
 .columns {
    margin-top: 10px;
 }
+.interact-columns {
+   margin-top: 10px;
+   max-width: 1200px;
+   overflow-x: scroll;
+}
 
 #data-quality-description {
     margin: 10px 50px;

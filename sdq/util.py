@@ -65,8 +65,15 @@ def none_bokeh_plot_grid(columns, *plots):
                              closeup_script=''))
         plot_id += 1
 
-    x_grouped = list(grouper(2, html))
+    x_grouped = list(grouper(columns, html))
     return render_template('none_bokeh_plot_grid.html', columns=columns, plot_html=x_grouped)
+
+
+def interact_plot_grid(layout):
+    script, div = components(layout)
+
+    return render_template('interaction_grid.html', script=script, div=div)
+
 
 def plasma_colors():
     return ['#0C0786', '#100787', '#130689', '#15068A', '#18068B', '#1B068C', '#1D068D', '#1F058E', '#21058F',

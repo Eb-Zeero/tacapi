@@ -1,6 +1,4 @@
-from bokeh.plotting import figure
 from sdq.util import none_bokeh_plot_grid
-from sdq.queries.hrs import arc_query
 
 
 def plot(c):
@@ -12,9 +10,9 @@ def plot(c):
     '''.format(c=c)
 
 
-title = 'HRS Arc Waves'
+title = 'Responsive circles'
 
 
 content = none_bokeh_plot_grid(3, plot('lightgray'), plot('orange'), plot('green'), plot('pink'), plot('blue'), plot('yellow)'))
 
-description = 'Arc waves fro HRS'
+description = 'Responsive circles'

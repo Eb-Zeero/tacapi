@@ -8,8 +8,10 @@ from sdq.errors import NotFoundException
 
 _telescope_menu = (
     ('Weather', 'weather', 'sdq.content.telescope.weather'),
+    ('Interact', 'interact', 'sdq.content.telescope.interact'),
     ('Seeing', 'seeing', 'sdq.content.telescope.seeing'),
     ('Coffee', 'coffee', 'sdq.content.telescope.coffee')
+
 )
 
 
