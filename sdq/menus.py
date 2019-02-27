@@ -27,13 +27,21 @@ _rss_menu = (
     ('Throughput', 'throughput', 'sdq.content.rss.throughput'),
     ('Straylight', 'straylight', 'sdq.content.rss.straylight')
 )
-_hrs_menu = (
-    ('Diagnostic', 'diagnostics', 'sdq.content.hrs.diagnostics'),
-    ('Arc Wave', 'arc', 'sdq.content.hrs.arc'),
-    ('Bias Levels', 'bias', 'sdq.content.hrs.bias'),
-    ('Flats', 'flats', 'sdq.content.hrs.flats'),
-    ('Order', 'order', 'sdq.content.hrs.order'),
-    ('Velocity Standards', 'velocity', 'sdq.content.hrs.velocity'),
+_hrs_blue_menu = (
+    ('Diagnostic', 'diagnostics', 'sdq.content.hrs_blue.diagnostics'),
+    ('Arc Wave', 'arc', 'sdq.content.hrs_blue.arc'),
+    ('Bias Levels', 'bias', 'sdq.content.hrs_blue.bias'),
+    ('Flats', 'flats', 'sdq.content.hrs_blue.flats'),
+    ('Order', 'order', 'sdq.content.hrs_blue.order'),
+    ('Velocity Standards', 'velocity', 'sdq.content.hrs_blue.velocity'),
+)
+_hrs_red_menu = (
+    ('Diagnostic', 'diagnostics', 'sdq.content.hrs_red.diagnostics'),
+    ('Arc Wave', 'arc', 'sdq.content.hrs_red.arc'),
+    ('Bias Levels', 'bias', 'sdq.content.hrs_red.bias'),
+    ('Flats', 'flats', 'sdq.content.hrs_red.flats'),
+    ('Order', 'order', 'sdq.content.hrs_red.order'),
+    ('Velocity Standards', 'velocity', 'sdq.content.hrs_red.velocity'),
 )
 
 # primary menu
@@ -44,7 +52,8 @@ _primary_menu = (
     ('Telescope', 'telescope', _telescope_menu),
     ('Salticam', 'salticam', _salticam_menu),
     ('RSS', 'rss', _rss_menu),
-    ('HRS', 'hrs', _hrs_menu),
+    ('HRS (Blue)', 'hrs_blue', _hrs_blue_menu),
+    ('HRS (Red)', 'hrs_red', _hrs_red_menu),
 )
 
 

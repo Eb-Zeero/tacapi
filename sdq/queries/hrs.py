@@ -36,3 +36,49 @@ def arc_query(start_date, end_date, obsmode, arm):
 
     source = ColumnDataSource(df)
     return source
+
+
+def bias_counts_query(start_date, end_date, arm):
+
+    sql = """
+SELECT obsdate, bias_med, bias_std
+FROM DQ_HRS_BIAS
+WHERE obsdate > '{start_date}'
+    AND obsdate <'{end_date}'
+    AND hrs_arm = '{arm}'
+""".format(start_date=start_date, end_date=end_date, arm=arm)
+
+    df = pd.read_sql(sql, sdb_connect())
+    # d = {
+    #     'col1': [1, 2, 3, 3, 1, 2, 5, 4, 3, 4, 2, 3, 4, 1],
+    #     'col2': [0.11, 0.12, 0.13, 0.13, 0.11, 0.12, 0.15, 0.14, 0.13, 0.14, 0.12, 0.13, 0.14, 0.11],
+    #     'col3': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    # }
+    # df = pd.DataFrame(data=d)
+    #
+    # source = ColumnDataSource(df)
+    df['Date'] = pd.to_datetime(df['obsdate'])
+    return df
+
+
+def bias_gradient_query(start_date, end_date, arm, cf):
+    gradient = 'bias_cfx' if cf == 'x' else 'bias_cfy'
+    sql = """
+SELECT obsdate, {gradient}
+FROM DQ_HRS_BIAS
+WHERE obsdate > '{start_date}'
+    AND obsdate <'{end_date}'
+    AND hrs_arm = '{arm}'
+""".format(start_date=start_date, end_date=end_date, arm=arm, gradient=gradient)
+
+    df = pd.read_sql(sql, sdb_connect())
+    # d = {
+    #     'colx': [3, 2, 2, 3, 3, 2, 3, 4, 2, 4, 2, 3, 2, 3],
+    #     'coly': [1, 2, 3, 2, 1, 2, 3, 4, 3, 2, 2, 3, 2, 1],
+    #     'col2': [0.11, 0.12, 0.13, 0.13, 0.11, 0.12, 0.15, 0.14, 0.13, 0.14, 0.12, 0.13, 0.14, 0.11],
+    #     'col3': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    # }
+    # df = pd.DataFrame(data=d)
+
+    df['Date'] = pd.to_datetime(df['obsdate'])
+    return df

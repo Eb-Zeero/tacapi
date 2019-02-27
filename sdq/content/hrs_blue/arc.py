@@ -6,6 +6,7 @@ from sdq.queries.hrs import arc_query
 
 def plot(obs_mode, arm):
     source = arc_query(str(g.dates['start_date']), str(g.dates['end_date']), obs_mode, arm)
+    print(source)
 
     p = figure(plot_height=150, plot_width=200, title=arm.upper() + ' ' + obs_mode, x_axis_label='Date',
                y_axis_label='AVG(DeltaX)', x_axis_type='datetime',)
