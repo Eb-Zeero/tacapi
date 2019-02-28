@@ -50,7 +50,6 @@ title = 'HRS Bias Levels'
 
 content = bokeh_plot_grid(2,
                           plot_counts('blue'),
-                          plot_gradient('blue', 'z'),
                           plot_gradient('blue', 'x'),
                           plot_gradient('blue', 'y')
                           )
