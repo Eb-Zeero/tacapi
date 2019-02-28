@@ -49,9 +49,7 @@ WHERE obsdate > '{start_date}'
 """.format(start_date=start_date, end_date=end_date, arm=arm)
 
     df = pd.read_sql(sql, sdb_connect())
-    print('Query: ', sql, '\nConnect: ', sdb_connect())
     df['Date'] = pd.to_datetime(df['obsdate'])
-    print('Frame: ', df)
     return df
 
 
@@ -66,13 +64,5 @@ WHERE obsdate > '{start_date}'
 """.format(start_date=start_date, end_date=end_date, arm=arm, gradient=gradient)
 
     df = pd.read_sql(sql, sdb_connect())
-    # d = {
-    #     'colx': [3, 2, 2, 3, 3, 2, 3, 4, 2, 4, 2, 3, 2, 3],
-    #     'coly': [1, 2, 3, 2, 1, 2, 3, 4, 3, 2, 2, 3, 2, 1],
-    #     'col2': [0.11, 0.12, 0.13, 0.13, 0.11, 0.12, 0.15, 0.14, 0.13, 0.14, 0.12, 0.13, 0.14, 0.11],
-    #     'col3': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-    # }
-    # df = pd.DataFrame(data=d)
-
     df['Date'] = pd.to_datetime(df['obsdate'])
     return df
