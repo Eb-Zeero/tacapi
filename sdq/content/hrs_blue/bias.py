@@ -7,7 +7,7 @@ from sdq.util import bokeh_plot_grid
 
 def plot_counts(arm):
     source = bias_counts_query(str(g.dates['start_date']), str(g.dates['end_date']), arm)
-    print(source)
+    print('Data: ',source)
 
     p = figure(plot_height=150, plot_width=200, title='Count vs time', x_axis_type='datetime')
     p.xaxis.axis_label = 'Date'

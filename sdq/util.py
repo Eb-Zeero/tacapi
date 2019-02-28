@@ -54,7 +54,6 @@ def bokeh_plot_grid(columns, *plots):
             closeup_script=modal_grid_html[0])
         )
         plot_id += 1
-        print('XX0: ', html[0][0])
     return render_template('plot_grid.html', columns=columns, zipped_data=zip(html, plot_info))
 
 
@@ -72,8 +71,6 @@ def none_bokeh_plot_grid(columns, *plots):
         plot_id += 1
 
     x_grouped = list(grouper(columns, html))
-    print('XX1: ', x_grouped[0][0])
-    print('XX2: ', x_grouped[0][1])
     return render_template('none_bokeh_plot_grid.html', columns=columns, plot_html=x_grouped)
 
 
