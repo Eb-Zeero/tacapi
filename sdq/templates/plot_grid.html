@@ -1,20 +1,21 @@
 <div class="plot-grid notification" style="grid-template-columns: repeat({{ columns }}, 1fr)">
-    {% for p in plot_html %}
+    {% for p, info in zipped_data %}
         <plot-container>
             <div id="plot-{{ p.id }}">
                 {{ p.grid_div | safe }}
             </div>
             <plot-info>
-                <div class="info">This is a(n) circle.</div>
+                <div class="info">{{ info }}</div>
             </plot-info>
             <plot-modal>
                 <div id="plot-{{ p.modal_id }}">
                     {{ p.closeup_div | safe }}
                 </div>
+
             </plot-modal>
         </plot-container>
 
         {{ p.grid_script | safe }}
-        {{ p.closeup_script | safe }}
+        {{ p.closeup_script| safe }}
     {% endfor %}
 </div>

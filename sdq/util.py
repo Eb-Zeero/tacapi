@@ -19,22 +19,24 @@ def grouper(n, iterable, fillvalue=None):
 def bokeh_plot_grid(columns, *plots):
     # create html content
     html = []
+    plot_info = []
     for p in plots:
         modal_plot = p
         plot = p
+        info = p.name
 
         try:
 
-            modal_plot.sizing_mode = 'scale_both'
+            modal_plot.sizing_mode = 'scale_width'
             p.toolbar.logo = None
             modal_plot.toolbar_location = 'right'
-            modal_plot.height = 700
-            modal_plot.width = 700
+            modal_plot.height = 800
+            modal_plot.width = 800
             modal_plot.toolbar_location = 'right'
             modal_grid_html = components(modal_plot)
             plot.sizing_mode = 'scale_width'
             plot.toolbar_location = None
-            p.toolbar.active_drag = None
+            plot.toolbar.active_drag = None
 
             grid_html = components(plot)
 
@@ -42,14 +44,18 @@ def bokeh_plot_grid(columns, *plots):
             pass
 
         global plot_id
-        html.append(PlotHtml(id=plot_id,
-                             modal_id=str(plot_id)+'-modal',
-                             grid_div=grid_html[1],
-                             grid_script=grid_html[0],
-                             closeup_div=modal_grid_html[1],
-                             closeup_script=modal_grid_html[0]))
+        plot_info.append(info)
+        html.append(PlotHtml(
+            id=plot_id,
+            modal_id=str(plot_id) + '-modal',
+            grid_div=grid_html[1],
+            grid_script=grid_html[0],
+            closeup_div=modal_grid_html[1],
+            closeup_script=modal_grid_html[0])
+        )
         plot_id += 1
-    return render_template('plot_grid.html', columns=columns, plot_html=html)
+        print('XX0: ', html[0][0])
+    return render_template('plot_grid.html', columns=columns, zipped_data=zip(html, plot_info))
 
 
 def none_bokeh_plot_grid(columns, *plots):
@@ -66,6 +72,8 @@ def none_bokeh_plot_grid(columns, *plots):
         plot_id += 1
 
     x_grouped = list(grouper(columns, html))
+    print('XX1: ', x_grouped[0][0])
+    print('XX2: ', x_grouped[0][1])
     return render_template('none_bokeh_plot_grid.html', columns=columns, plot_html=x_grouped)
 
 

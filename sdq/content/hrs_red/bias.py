@@ -5,11 +5,11 @@ from sdq.queries.hrs import bias_counts_query, bias_gradient_query
 from sdq.util import bokeh_plot_grid
 
 
-def plot_counts(arm):
+def plot_counts(arm, name):
     source = bias_counts_query(str(g.dates['start_date']), str(g.dates['end_date']), arm)
     print(source)
 
-    p = figure(plot_height=150, plot_width=200, title='Count vs time', x_axis_type='datetime')
+    p = figure(name=name, plot_height=150, plot_width=200, title='Count vs time', x_axis_type='datetime')
     p.xaxis.axis_label = 'Date'
     p.yaxis.axis_label = 'Count'
     p.circle(source=ColumnDataSource(source),
@@ -34,10 +34,10 @@ def plot_counts(arm):
     return p
 
 
-def plot_gradient(arm, gradient):
+def plot_gradient(arm, gradient, name):
     source = bias_gradient_query(str(g.dates['start_date']), str(g.dates['end_date']), arm, gradient)
 
-    p = figure(plot_height=150, plot_width=200, title='Gradient cf{gradient}'.format(gradient=gradient),
+    p = figure(name=name, plot_height=150, plot_width=200, title='Gradient cf{gradient}'.format(gradient=gradient),
                x_axis_type='datetime')
     p.xaxis.axis_label = 'Date'
     p.yaxis.axis_label = 'bias_cf{gradient}'.format(gradient=gradient)
@@ -49,10 +49,9 @@ def plot_gradient(arm, gradient):
 title = 'HRS Bias Levels'
 
 content = bokeh_plot_grid(2,
-                          plot_counts('red'),
-                          plot_gradient('red', 'z'),
-                          plot_gradient('red', 'x'),
-                          plot_gradient('red', 'y')
+                          plot_counts('red', 'bias count medians'),
+                          plot_gradient('red', 'x', 'bias CFX'),
+                          plot_gradient('red', 'y', 'bias CFY')
                           )
 
 description = 'Bias levels for HRS'
