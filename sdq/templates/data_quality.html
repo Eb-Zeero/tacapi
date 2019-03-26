@@ -1,13 +1,30 @@
 {% extends 'base.html' %}
 
 {% block page_content %}
-<nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand is-hoverable">
+<nav class="navbar-menu" role="navigation" aria-label="main navigation">
+    <div class="navbar-start is-hoverable">
         {% for item in primary_menu %}
-            <a class="navbar-item button  {% if item[1] == primary_menu_item[1] %}is-primary{% endif %}"
-               href="/dq/{{ item[1] }}">
-                {{ item[0] }}
-            </a>
+            {%if item[1] == 'hrs' %}
+                <div class="navbar-item  button has-dropdown is-hoverable {% if item[1] == primary_menu_item[1] %}is-primary{% endif %}">
+                    <a class="navbar-item"
+                       href="/dq/{{ item[1] }}">
+                        {{ item[0] }}
+                    </a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item">
+                            Blue
+                        </a>
+                        <a class="navbar-item">
+                            Red
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <a class="navbar-item button is-hoverable {% if item[1] == primary_menu_item[1] %}is-primary{% endif %}"
+                   href="/dq/{{ item[1] }}">
+                    {{ item[0] }}
+                </a>
+            {% endif %}
         {% endfor %}
     </div>
 </nav>

@@ -77,7 +77,12 @@ Please refer to the documentation on adding pages to this website.'\
         raise ContentModuleException(error)
     if request.method == 'POST':
         return redirect('/dq/'+page)
-
+    print(
+        'Page: ', page,  '\n',
+        'Pr: ', primary_menu_item(page), '\n',
+        'Sec: ', secondary_menu(page), '\n'
+        'SecI: ', secondary_menu_item(page), '\n'
+    )
     resp = make_response(render_template(
         'data_quality.html',
         primary_menu=primary_menu(),

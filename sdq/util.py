@@ -30,8 +30,8 @@ def bokeh_plot_grid(columns, *plots):
             modal_plot.sizing_mode = 'scale_width'
             p.toolbar.logo = None
             modal_plot.toolbar_location = 'right'
-            modal_plot.height = 800
-            modal_plot.width = 800
+            modal_plot.height = 700
+            modal_plot.width = 700
             modal_plot.toolbar_location = 'right'
             modal_grid_html = components(modal_plot)
             plot.sizing_mode = 'scale_width'

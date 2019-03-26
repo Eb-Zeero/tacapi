@@ -43,6 +43,22 @@ _hrs_red_menu = (
     ('Order', 'order', 'sdq.content.hrs_red.order'),
     ('Velocity Standards', 'velocity', 'sdq.content.hrs_red.velocity'),
 )
+_red_menu = (
+    ('Diagnostic', 'diagnostics', 'sdq.content.hrs.red.diagnostics'),
+    ('Arc Wave', 'arc', 'sdq.content.hrs.red.arc'),
+    ('Bias Levels', 'bias', 'sdq.content.hrs.red.bias'),
+    ('Flats', 'flats', 'sdq.content.hrs.red.flats'),
+    ('Order', 'order', 'sdq.content.hrs.red.order'),
+    ('Velocity Standards', 'velocity', 'sdq.content.hrs.red.velocity'),
+)
+_blue_menu = (
+    ('Diagnostic', 'diagnostics', 'sdq.content.hrs.blue.diagnostics'),
+    ('Arc Wave', 'arc', 'sdq.content.hrs.blue.arc'),
+    ('Bias Levels', 'bias', 'sdq.content.hrs.blue.bias'),
+    ('Flats', 'flats', 'sdq.content.hrs.blue.flats'),
+    ('Order', 'order', 'sdq.content.hrs.blue.order'),
+    ('Velocity Standards', 'velocity', 'sdq.content.hrs.blue.velocity'),
+)
 
 # primary menu
 #
@@ -54,6 +70,7 @@ _primary_menu = (
     ('RSS', 'rss', _rss_menu),
     ('HRS (Blue)', 'hrs_blue', _hrs_blue_menu),
     ('HRS (Red)', 'hrs_red', _hrs_red_menu),
+    ('HRS', 'hrs', _red_menu)
 )
 
 
