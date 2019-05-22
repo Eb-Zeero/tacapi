@@ -41,28 +41,32 @@ def arc_query(start_date, end_date, obsmode, arm):
 def bias_counts_query(start_date, end_date, arm):
 
     sql = """
-SELECT obsdate, bias_med, bias_std
-FROM DQ_HRS_BIAS
-WHERE obsdate > '{start_date}'
-    AND obsdate <'{end_date}'
-    AND hrs_arm = '{arm}'
+SELECT Date, bias_med, bias_std
+FROM DQ_HrsBias
+JOIN NightInfo USING(NightInfo_Id)
+JOIN DQ_HrsArm USING(DQ_HrsArm_Id)
+WHERE Date > '{start_date}'
+    AND Date <'{end_date}'
+    AND DQ_HrsArm = '{arm}'
 """.format(start_date=start_date, end_date=end_date, arm=arm)
 
     df = pd.read_sql(sql, sdb_connect())
-    df['Date'] = pd.to_datetime(df['obsdate'])
+    df['Date'] = pd.to_datetime(df['Date'])
     return df
 
 
 def bias_gradient_query(start_date, end_date, arm, cf):
     gradient = 'bias_cfx' if cf == 'x' else 'bias_cfy'
     sql = """
-SELECT obsdate, {gradient}
-FROM DQ_HRS_BIAS
-WHERE obsdate > '{start_date}'
-    AND obsdate <'{end_date}'
-    AND hrs_arm = '{arm}'
+SELECT Date, {gradient}
+FROM DQ_HrsBias
+JOIN NightInfo USING(NightInfo_Id)
+JOIN DQ_HrsArm USING(DQ_HrsArm_Id)
+WHERE Date > '{start_date}'
+    AND Date <'{end_date}'
+    AND DQ_HrsArm = '{arm}'
 """.format(start_date=start_date, end_date=end_date, arm=arm, gradient=gradient)
 
     df = pd.read_sql(sql, sdb_connect())
-    df['Date'] = pd.to_datetime(df['obsdate'])
+    df['Date'] = pd.to_datetime(df['Date'])
     return df

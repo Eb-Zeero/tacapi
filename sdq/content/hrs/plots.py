@@ -12,7 +12,7 @@ def plot_counts(arm, name):
     p.yaxis.axis_label = 'Count'
     p.circle(source=ColumnDataSource(source),
              x='Date', y='bias_med',
-             size=15, line_alpha=0.9, fill_alpha=0.8, color=arm)
+             size=15, line_alpha=0.9, fill_alpha=0.6, color=arm)
 
     # create the coordinates for the errorbars
     err_xs = []
@@ -40,5 +40,5 @@ def plot_gradient(arm, gradient, name):
     p.xaxis.axis_label = 'Date'
     p.yaxis.axis_label = 'bias_cf{gradient}'.format(gradient=gradient)
     p.circle(source=ColumnDataSource(source), y='bias_cf{gradient}'.format(gradient=gradient),
-             x='Date', size=15, line_alpha=0.9, fill_alpha=0.8, color=arm)
+             x='Date', size=15, line_alpha=0.9, fill_alpha=0.6, color=arm)
     return p
